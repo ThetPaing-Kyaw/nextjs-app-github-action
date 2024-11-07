@@ -23,8 +23,8 @@ jobs:
         with:
           name: build-artifacts
           path: |
-            node_modules/
-            out/
+            node_modules/some_important_module/
+            out/some_important_files/
 
   deploy-prod:
       runs-on: ubuntu-latest
