@@ -51,7 +51,14 @@ jobs:
 
       - name: Create CloudFront Invalidation
         run: |
-          aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }}
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} \
+            --invalidation-batch '{
+                "Paths": {
+                  "Quantity": 1,
+                  "Items": ["/index.html"]
+                },
+                "CallerReference": "unique-string"
+            }'
 
       - name: Deployment Status
         run: echo "Deployed to production"
