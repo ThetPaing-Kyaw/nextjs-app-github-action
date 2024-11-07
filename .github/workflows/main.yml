@@ -23,6 +23,9 @@ jobs:
         with:
           name: build-artifacts
           path: out/
+      
+      - name: Check if out/ exists
+        run: ls -la out/
         
       - name: Checkout Repository
         uses: actions/checkout@v3
