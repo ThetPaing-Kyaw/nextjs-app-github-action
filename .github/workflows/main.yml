@@ -23,8 +23,6 @@ jobs:
         with:
           name: build-artifacts
           path: out/
-      - name: Check if out/ exists
-        run: ls -la out/
         
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -38,7 +36,15 @@ jobs:
           aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws configure set region ${{ secrets.AWS_DEFAULT_REGION }}
+      
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifacts
 
+      - name: Check if out/ exists
+        run: ls -la out/
+      
       - name: Sync files to S3
         run: |
           aws s3 sync out/ s3://${{ secrets.AWS_S3_BUCKET_NAME }}
