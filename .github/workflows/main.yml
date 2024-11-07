@@ -15,7 +15,7 @@ jobs:
           node-version: '18'
       - name: Install NPM and Build
         run: |
-          npm install
+          # npm install
           npm run build
 
       - name: Upload build artifacts
