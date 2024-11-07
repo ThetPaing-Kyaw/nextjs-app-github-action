@@ -15,16 +15,14 @@ jobs:
           node-version: '18'
       - name: Install NPM and Build
         run: |
-          # npm install
+          npm install
           npm run build
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
           name: build-artifacts
-          path: |
-            node_modules/some_important_module/
-            out/some_important_files/
+          path: out/
 
   deploy-prod:
       runs-on: ubuntu-latest
